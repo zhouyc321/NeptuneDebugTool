@@ -1,0 +1,51 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <h2>Neptune Debug Tool</h2>
+    </div>
+</md-toolbar>
+<div flex layout="row">
+    <md-sidenav flex="15" md-is-locked-open="true" class="md-whiteframe-z1">
+        <md-content>
+            <br>
+            <center><input type="number" ng-model="input_adgroup_id" placeholder="Enter adgroup ID"></center>
+            <center><md-button class="md-raised md-primary" ng-click="debug(input_adgroup_id);"> Debug </md-button></center>
+            <p> Adgroup: </p>
+                <center> <p ng-style="customStyle.style">{{adgroup_id}}<br></p></center>
+                <center> <p ng-style="customStyle.style">{{debugStr.msg}}<br></p></center>
+<br>
+<md-divider></md-divider>
+<md-subheader class="md-no-sticky">Tabs</md-subheader>
+<md-list ng-repeat="section in tabs">
+      <md-list-item ng-click="addTab(section.title, section.content)" md-highlight="menu.isSectionSelected(section)" md-ink-ripple="#bbb">
+      {{section.title}}
+      </md-list-item>
+</md-list>
+<md-divider></md-divider>
+
+        </md-content>
+    </md-sidenav>
+    <div layout="column" flex>
+        <div class="box1">
+
+<div flex layout-fill class="dynamicTabs" layout="column">
+  <md-content flex layout-fill class="md-padding">
+    <md-tabs  flex layout-fill md-selected="selectedIndex" md-border-bottom="" md-autoselect="">
+      <md-tab ng-repeat="tab in selectedTabs" ng-disabled="tab.disabled" label="{{tab.title}}">
+        <div class="demo-tab tab{{$index%4}}" style="padding: 10px; text-align: center;">
+          <div style='float:right;'> <md-button class="md-raised" ng-click="removeTab( tab )" ng-disabled="tabs.length <= 1">Remove Tab</md-button></div>
+          <div ng-bind="tab.content"></div>
+        </div>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</div>
+
+        </div>
+        <div class="box2">
+            fixed
+        </div>
+    </div>
+</div>
+
+
+
