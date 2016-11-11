@@ -1,7 +1,8 @@
 # all the imports
 import logging
-from flask import render_template, Blueprint, Response, jsonify
+from flask import render_template, Blueprint
 from debug_modules.selfsold import Selfsold
+from debug_modules.budget import Budget
 
 logger = logging.getLogger('debugTool.log')
 
@@ -11,7 +12,10 @@ bp = Blueprint('debugTool_routes', __name__)
 def index():
     return render_template('index.html')
 
-@bp.route("/data/debug/<int:adgroup_id>", methods=['GET'])
-def all_employees(adgroup_id):
-    print adgroup_id
-    return jsonify(Selfsold.getDocId(adgroup_id))
+@bp.route("/data/selfsold/<int:adgroup_id>", methods=['GET'])
+def debugSefsold(adgroup_id):
+    return Selfsold.selfsold(adgroup_id)
+
+@bp.route("/data/budget/<int:adgroup_id>", methods=['GET'])
+def debugBudget(adgroup_id):
+    return Budget.budget(adgroup_id)

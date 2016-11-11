@@ -1,51 +1,109 @@
-<md-toolbar>
-    <div class="md-toolbar-tools">
-        <h2>Neptune Debug Tool</h2>
-    </div>
-</md-toolbar>
-<div flex layout="row">
-    <md-sidenav flex="15" md-is-locked-open="true" class="md-whiteframe-z1">
-        <md-content>
-            <br>
-            <center><input type="number" ng-model="input_adgroup_id" placeholder="Enter adgroup ID"></center>
+<div layout="column" layout-fill>
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Neptune Debug Tool</h2>
+        </div>
+    </md-toolbar>
+    <div layout-fill flex layout="row">
+        <md-sidenav md-is-locked-open="true" class="nevbar md-whiteframe-z1">
+            <md-content class="overflowhidden">
+                <br>
+                <center><input type="number" ng-model="input_adgroup_id" placeholder="Enter adgroup ID" style="width:150px"></center>
+                <br>
+                <md-divider></md-divider>
+                <md-subheader class="md-no-sticky">Modules</md-subheader>
+                <md-list-item class >
+                    <p> Selfsold </p>
+                    <md-checkbox ng-click="toggle('selfsold', selectedModules)"></md-checkbox>
+                </md-list-item>
+                <md-list-item>
+                    <p> Budget </p>
+                    <md-checkbox ng-click="toggle('budget', selectedModules)"></md-checkbox>
+                </md-list-item>
+                <md-divider></md-divider>
+            </md-content>
             <center><md-button class="md-raised md-primary" ng-click="debug(input_adgroup_id);"> Debug </md-button></center>
-            <p> Adgroup: </p>
-                <center> <p ng-style="customStyle.style">{{adgroup_id}}<br></p></center>
-                <center> <p ng-style="customStyle.style">{{debugStr.msg}}<br></p></center>
-<br>
-<md-divider></md-divider>
-<md-subheader class="md-no-sticky">Tabs</md-subheader>
-<md-list ng-repeat="section in tabs">
-      <md-list-item ng-click="addTab(section.title, section.content)" md-highlight="menu.isSectionSelected(section)" md-ink-ripple="#bbb">
-      {{section.title}}
-      </md-list-item>
-</md-list>
-<md-divider></md-divider>
+        </md-sidenav>
 
-        </md-content>
-    </md-sidenav>
-    <div layout="column" flex>
-        <div class="box1">
-
-<div flex layout-fill class="dynamicTabs" layout="column">
-  <md-content flex layout-fill class="md-padding">
-    <md-tabs  flex layout-fill md-selected="selectedIndex" md-border-bottom="" md-autoselect="">
-      <md-tab ng-repeat="tab in selectedTabs" ng-disabled="tab.disabled" label="{{tab.title}}">
-        <div class="demo-tab tab{{$index%4}}" style="padding: 10px; text-align: center;">
-          <div style='float:right;'> <md-button class="md-raised" ng-click="removeTab( tab )" ng-disabled="tabs.length <= 1">Remove Tab</md-button></div>
-          <div ng-bind="tab.content"></div>
-        </div>
-      </md-tab>
-    </md-tabs>
-  </md-content>
-</div>
-
-        </div>
-        <div class="box2">
-            fixed
+        <div class="fillout">
+            <md-content class="fillout">
+                <md-tabs class="fillout">
+                    <md-tab label="Selfsold" class="fillout">
+                        <div class="fillout" layout="column">
+                            <div class="fillout box1" layout="column">
+                                <md-toolbar ng-style="customStyle.selfsoldToolbar" style="width:100%">
+                                    <div class="md-toolbar-tools" class="fillout">
+                                    <h2>Adgroup {{selfsold.adgroup_id}} {{selfsold.msg}}</h2><span flex></span><h2>DocId: {{selfsold.doc_id}}</h2>
+                                    </div>
+                                </md-toolbar>
+                                <div flex layout="row">
+                                    <div class="fillout" style="overflow:scroll">
+                                        <table>
+                                            <tr>
+                                                <th align="left" style="width:300px">Key</th>
+                                                <th align="left">Value</th>
+                                            </tr>
+                                            <tr ng-repeat="(key, value) in selfsold.fwdFields">
+                                                <td>{{key}}</td><td>{{value}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="fillout" style="overflow:scroll">
+                                        <table>
+                                            <tr>
+                                                <th align="left" style="width:300px">Key</th>
+                                                <th align="left" style="width:300px">Type</th>
+                                                <th align="left">Value</th>
+                                            </tr>
+                                            <tr ng-repeat="obj in selfsold.booleanExp">
+                                                <td>{{obj.key}}</td><td>{{obj.type}}</td><td>{{obj.value}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box2" style="white-space: pre-line;overflow:scroll">
+                                {{selfsold.errorlog}}
+                            </div>
+                        </div>
+                    </md-tab>
+                    <md-tab label="Budget">
+                        <md-content class="fillout">
+                            <div layout="column" class="fillout">
+                                <md-toolbar ng-style="customStyle.budgetToolbar" style="width:100%">
+                                    <div class="md-toolbar-tools" class="fillout">
+                                    <h2>Adgroup {{budget.adgroup_id}} {{budget.msg}}</h2><span flex></span><h2>DocId: {{budget.doc_id}}</h2>
+                                    </div>
+                                </md-toolbar>
+                                <div class="box1" layout="row">
+                                    <div class="fillout" style="overflow:scroll">
+                                        <table>
+                                            <tr>
+                                                <th align="left" style="width:300px">Key</th>
+                                                <th align="left">Value</th>
+                                            </tr>
+                                            <tr ng-repeat="(key, value) in budget.fwdFields">
+                                                <td>{{key}}</td><td>{{value}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="fillout" layout="column">
+                                        <div>
+                                            abc
+                                        </div>
+                                        <div>
+                                            def
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box2" style="white-space: pre-line;overflow:scroll">
+                                    {{budget.errorlog}}
+                                </div>
+                            </div>
+                        </md-content>
+                    </md-tab>
+                </md-tabs>
+            </md-content>
         </div>
     </div>
 </div>
-
-
-

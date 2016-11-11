@@ -1,4 +1,4 @@
-body {
+.overflowhidden{
     overflow: hidden;
 }
 
@@ -7,63 +7,27 @@ div {
   height: 100%;
 }
 
+.nevbar {
+  width:100%;
+  max-width:170px;
+  min-width:120px;
+}
+
+.fillout {
+  width: 100%;
+  height: 100%;
+}
 
 .box2, .box1 {
-  display:flex;
   box-sizing: border-box;
   min-width:100%;
 }
 
 .box1 {
   height:80%;
-  flex:1 1 80%;
 }
 
 .box2 {
-  height:100px;
+  height:20%;
 }
-
-.dynamicTabs md-content {
-  background-color: transparent !important; }
-
-.dynamicTabs md-content md-tabs {
-    border: 1px solid #e1e1e1; }
-
-.dynamicTabs md-content md-tabs md-tab-content {
-      overflow: hidden;
-      background: #f6f6f6; }
-
-.dynamicTabs md-content md-tabs md-tabs-wrapper {
-      background: white; }
-
-.dynamicTabs md-content h1:first-child {
-    margin-top: 0; }
-
-.dynamicTabs md-input-container {
-  padding-bottom: 0; }
-
-.dynamicTabs .remove-tab {
-  margin-bottom: 40px; }
-
-.dynamicTabs .demo-tab > div > div {
-  padding: 25px;
-  box-sizing: border-box; }
-
-.dynamicTabs .edit-form input {
-  width: 100%; }
-
-.dynamicTabs md-tabs {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12); }
-
-.dynamicTabs md-tab[disabled] {
-  opacity: 0.5; }
-
-.dynamicTabs label {
-  text-align: left; }
-
-.dynamicTabs .long > input {
-  width: 264px; }
-
-.dynamicTabs .md-button.add-tab {
-  transform: translateY(5px); }
 

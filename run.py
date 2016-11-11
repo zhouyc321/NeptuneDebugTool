@@ -2,6 +2,7 @@
 
 # all the imports
 from flask import Flask, render_template
+from debug_modules.util import Util
 import logging
 
 app = Flask(__name__)
@@ -17,4 +18,5 @@ app.before_first_request(initialize)
 
 if __name__ == "__main__":
     logger.info('Running in debug mode.')
+    Util.getDBConf()
     app.run(host='0.0.0.0', port=5000, debug=True)
