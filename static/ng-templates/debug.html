@@ -89,10 +89,18 @@
                                     </div>
                                     <div class="fillout" layout="column">
                                         <div>
-                                            abc
+                                            <table>
+                                            <tr>
+                                                <th align="left" style="width:300px">Key</th>
+                                                <th align="left">Value</th>
+                                            </tr>
+                                            <tr ng-repeat="(key, value) in budget.autobid">
+                                                <td>{{key}}</td><td>{{value}}</td>
+                                            </tr>
+                                            </table>
                                         </div>
                                         <div>
-                                            def
+                                            Daily Impression = {{budget.dailyimp}}
                                         </div>
                                     </div>
                                 </div>

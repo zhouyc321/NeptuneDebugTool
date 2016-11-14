@@ -68,8 +68,7 @@ class Selfsold:
         data = {}
         adgroupHash = Selfsold.getDocId(data, id)
         Selfsold.getErrorLog(data, id)
-        if data['doc_id'] == -1:
-            return json.dumps(data)
-        Selfsold.getFwdIdxFields(data, adgroupHash)
-        Selfsold.getBooleanExp(data, id)
+        if data['doc_id'] != -1:
+            Selfsold.getFwdIdxFields(data, adgroupHash)
+            Selfsold.getBooleanExp(data, id)
         return json.dumps(data)

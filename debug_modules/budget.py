@@ -3,6 +3,8 @@ import json
 
 class Budget:
 
+    autoBidFieldsName = ["adgroupId", "mult", "grad", "orgMult", "numUnsuccessfulImprovements", "initSPR", "finalSPR", "spentRateHistory", "winRateHistory"]
+
     @staticmethod
     def getDocId(data, id):
         cmd = "grep -nP \"\t" + str(id) + "\t\" /home/xad/neptune/logs/index/budget/current/adgroupbudgetdetails.index | awk -F '\t' '{print $1}'"
@@ -44,13 +46,35 @@ class Budget:
         data['errorlog'] = output
 
     @staticmethod
+    def getAutoBidHistory(data, id):
+        cmd = "grep '^" + str(id) + " ' /home/xad/neptune/logs/index/budget/current/multipliers.data"
+        output = Util.call(cmd)
+        fields = output.split(' ')
+        fields = filter(None, fields)
+        autoBidFields = {}
+        for i in range(0, len(fields)):
+            autoBidFields[Budget.autoBidFieldsName[i]] = fields[i]
+        data['autobid'] = autoBidFields
+
+    @staticmethod
+    def getDailyImp(data, id):
+        sqlQuery = "SELECT dailyImp FROM budget WHERE adGroup_id = " + str(id) + ";";
+        print sqlQuery
+        result = Util.runSqlQuery(sqlQuery)
+        for row in result:
+            imp = row[0]
+        data['dailyimp'] = imp
+
+
+    @staticmethod
     def budget(id):
         data = {}
         adgroupHash = Budget.getDocId(data, id)
         Budget.getErrorLog(data, id)
-        if data['doc_id'] == -1:
-            return json.dumps(data)
-        Budget.getFwdIdxFields(data, adgroupHash)
+        if data['doc_id'] != -1:
+            Budget.getFwdIdxFields(data, adgroupHash)
+        Budget.getAutoBidHistory(data, id)
+        Budget.getDailyImp(data, id)
         return json.dumps(data)
 
 
