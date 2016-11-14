@@ -1,6 +1,6 @@
 import subprocess
 import yaml
-from mysql.connector.pooling import MySQLConnectionPool
+import mysql.connector
 
 class Util:
     conf_file = "/home/xad/neptune/conf/index/normandy/indexgen.conf"
@@ -27,15 +27,8 @@ class Util:
         stream.close()
 
     @staticmethod
-    def getDBConnection(dbconfig, pool_name):
-        mysql_pool = MySQLConnectionPool(pool_name = pool_name,
-                                         **dbconfig)
-        conn = mysql_pool.get_connection()
-        return conn
-
-    @staticmethod
     def runSqlQuery(query):
-        conn = Util.getDBConnection(Util.dbconfig, "test")
+        conn = mysql.connector.connect(**Util.dbconfig)
         cursor = conn.cursor()
         data = None
         try:
@@ -45,4 +38,5 @@ class Util:
             print(e)
         finally:
             cursor.close()
+            conn.close()
             return data

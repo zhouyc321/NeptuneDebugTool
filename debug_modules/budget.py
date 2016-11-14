@@ -59,11 +59,12 @@ class Budget:
     @staticmethod
     def getDailyImp(data, id):
         sqlQuery = "SELECT dailyImp FROM budget WHERE adGroup_id = " + str(id) + ";";
-        print sqlQuery
         result = Util.runSqlQuery(sqlQuery)
+        imp = -1
         for row in result:
             imp = row[0]
-        data['dailyimp'] = imp
+        if imp != -1:
+            data['dailyimp'] = imp
 
 
     @staticmethod
