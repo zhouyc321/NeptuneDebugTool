@@ -63,12 +63,4 @@ app.controller('DebugCtrl', ['$scope', '$state', '$log', '$stateParams', '$http'
     };
     var selectedModules = [];
     $scope.selectedModules = selectedModules;
-    var tabs = [
-          { title: 'One', content: "Tabs will become paginated if there isn't enough room for them."},
-          { title: 'Selfsold', content: "Selfsold Debug Info"},
-          { title: 'Three', content: "You can bind the selected tab via the selected attribute on the md-tabs element."},
-         ],
-        selected = null,
-        previous = null;
-    $scope.tabs = tabs;
 }])

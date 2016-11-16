@@ -70,6 +70,7 @@ class Budget:
     @staticmethod
     def budget(id):
         data = {}
+        data['adgroup_id'] = id
         adgroupHash = Budget.getDocId(data, id)
         Budget.getErrorLog(data, id)
         if data['doc_id'] != -1:

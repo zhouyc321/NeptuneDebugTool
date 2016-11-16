@@ -20,6 +20,10 @@
                     <p> Budget </p>
                     <md-checkbox ng-click="toggle('budget', selectedModules)"></md-checkbox>
                 </md-list-item>
+                <md-list-item class >
+                    <p> Query </p>
+                    <md-checkbox ng-click="toggle('query', selectedModules)"></md-checkbox>
+                </md-list-item>
                 <md-divider></md-divider>
             </md-content>
             <center><md-button class="md-raised md-primary" ng-click="debug(input_adgroup_id);"> Debug </md-button></center>
@@ -110,6 +114,22 @@
                             </div>
                         </md-content>
                     </md-tab>
+                    <md-tab label="Query">
+                        <md-content class="fillout">
+                            <div layout="column" class="fillout">
+                                <md-toolbar ng-style="customStyle.budgetToolbar" style="width:100%">
+                                    <div class="md-toolbar-tools" class="fillout">
+                                    <h2>Query {{budget.adgroup_id}}</h2>
+                                    </div>
+                                </md-toolbar>
+                                <div class="box1" layout="row">
+                                </div>
+                                <div class="box2" style="white-space: pre-line;overflow:scroll">
+                                </div>
+                            </div>
+                        </md-content>
+                    </md-tab>
+
                 </md-tabs>
             </md-content>
         </div>

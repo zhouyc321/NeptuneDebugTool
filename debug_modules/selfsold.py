@@ -66,6 +66,7 @@ class Selfsold:
     @staticmethod
     def selfsold(id):
         data = {}
+        data['adgroup_id'] = id
         adgroupHash = Selfsold.getDocId(data, id)
         Selfsold.getErrorLog(data, id)
         if data['doc_id'] != -1:
